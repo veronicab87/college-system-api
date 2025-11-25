@@ -1,10 +1,11 @@
 // src/features/matriculas/matriculas.controller.js
+import { getmatriculas } from "./matriculas.service.js";
 
 import * as matriculasService from "./matriculas.service.js";
 
 export const listarMatriculas = async (req, res) => {
   try {
-    const data = await matriculasService.listarMatriculas();
+    const data = await getmatriculas()
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: "❌ Error listando matrículas", detalle: err.message });
