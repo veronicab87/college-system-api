@@ -1,4 +1,4 @@
-import estudiantesService from "./estudiantesService.js";
+import estudiantesService from "./estudiantes.service.js";
 
 const estudiantesController = {
   listar: async (req, res) => {
@@ -22,9 +22,18 @@ const estudiantesController = {
 
   crear: async (req, res) => {
     try {
-      const nuevo = await estudiantesService.crear(req.body);
-      res.json(nuevo);
+      const data = req.body;
+
+      const estudiante = await estudiantesService.crear(data);
+      res.json({
+        mensaje: "Estudiante creado",
+        result: estudiante
+      });
     } catch (error) {
+      console.log('--->', error.code);
+      if(error.code === 'ER_DUP_ENTRY') {
+        return res.status(400).json({ error: "El estudiante ya existe" });
+      }
       res.status(500).json({ error: "Error creando estudiante" });
     }
   },

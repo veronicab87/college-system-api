@@ -12,6 +12,18 @@ export const listarMatriculas = async (req, res) => {
   }
 };
 
+export const obtenerMatricula = async (req, res) => {
+  try {
+    const matricula = await matriculasService.getMatriculaPorId(req.params.id);
+    if (!matricula) {
+      return res.status(404).json({ error: "⚠️ Matrícula no encontrada" });
+    }
+    res.json(matricula);
+  } catch (err) {
+    res.status(500).json({ error: "❌ Error obteniendo matrícula", detalle: err.message });
+  }
+}
+
 export const crearMatricula = async (req, res) => {
   try {
     const nueva = await matriculasService.crearMatricula(req.body);
