@@ -30,10 +30,10 @@ export const getMatriculaPorId = async (id) => {
 };
 
 export const crearMatricula = async (data) => {
-  const { estudiante_id, curso_id, fecha_matricula } = data;
+  const { estudiante, curso, jornada, fecha } = data;
   const [result] = await db.query(
-    "INSERT INTO matriculas (estudiante_id, curso_id, fecha) VALUES (?, ?, ?)",
-    [estudiante_id, curso_id, fecha_matricula]
+    "INSERT INTO matriculas (estudiante_id, curso_id, jornada_id, fecha) VALUES (?, ?, ?, ?)",
+    [estudiante, curso, jornada, fecha]
   );
   return { id: result.insertId, ...data };
 }

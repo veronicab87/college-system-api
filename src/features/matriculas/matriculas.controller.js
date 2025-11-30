@@ -26,9 +26,11 @@ export const obtenerMatricula = async (req, res) => {
 
 export const crearMatricula = async (req, res) => {
   try {
+    console.log(req.body);
     const nueva = await matriculasService.crearMatricula(req.body);
     res.status(201).json({ mensaje: "✅ Matrícula creada", ...nueva });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: "❌ Error creando matrícula", detalle: err.message });
   }
 };
