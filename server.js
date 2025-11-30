@@ -3,9 +3,7 @@ const app = express()
 const port = 3001
 import routes from './routes/index.js';
 import cors from 'cors';    
-app.use(cors({
-    origin:['http://localhost:3000', 'http://localhost:5173']  //frontend  //frontend
-}));
+app.use(cors());
 
 app.use(express.json());
 app.use('/api/', routes);
